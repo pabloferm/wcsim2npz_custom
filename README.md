@@ -13,10 +13,13 @@ export WCSIMBUILD=/path/to/your/WCSim/build/directory
 
 ## Usage
 ```
-python event_dump.py /path/to/your/wcsim/root/files/*root
+python event_dump.py /path/to/your/wcsim/root/files*.root
 ```
 
 The code will produce a `.npz` file of numpy arrays with the same name and in the same location as the input root files, but with the different extension.
 
 ## Reading npz files
-
+The program `plot_npz.py` has a first simple attempt that takes a .npz file as input and loops over its variables.
+```
+python plot_npz.py /path/to/your/wcsim/root/file.npz
+```
