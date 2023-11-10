@@ -1,4 +1,5 @@
 # wcsim2npz_custom
+This code converts WCSim generated root files into npz numpy files easily handled with python/numpy. For more details, https://numpy.org/doc/stable/reference/generated/numpy.load.html
 
 ## Requirements
  - numpy
