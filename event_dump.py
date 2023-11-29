@@ -80,6 +80,7 @@ def dump_file(infile, outfile):
 
         digi_hits = wcsim.get_digitized_hits()
         digi_hit_pmt[ev] = digi_hits["pmt"]
+        print(digi_hits["pmt"])
         digi_hit_charge[ev] = digi_hits["charge"]
         digi_hit_time[ev] = digi_hits["time"]
         digi_hit_trigger[ev] = digi_hits["trigger"]
