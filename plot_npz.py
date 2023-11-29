@@ -21,3 +21,11 @@ for f in args.input_files:
         if variable == 'energy':
             plt.hist(data[variable])
             plt.show()
+        elif variable == 'position':
+            fig = plt.figure()
+            ax = fig.add_subplot(projection='3d')
+            ax.scatter(data[variable][:,0], data[variable][:,1], data[variable][:,2], marker='o')
+        elif variable == 'direction':
+            fig = plt.figure()
+            ax = fig.add_subplot(projection='3d')
+            ax.quiver(data['position'][:,0], data['position'][:,1], data['position'][:,2], data[variable][:,0], data[variable][:,1], data[variable][:,2], length=0.1, normalize=True)
