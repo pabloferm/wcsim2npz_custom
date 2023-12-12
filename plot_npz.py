@@ -12,20 +12,68 @@ all_variables = ['event_id', 'root_file', 'pid', 'position', 'direction', 'energ
 
 
 for f in args.input_files:
-    data = load(f)
-    lst = data.files # list of variable in file
+    data = load(f, allow_pickle = True)
+    lst = data.files    #list of variable in file
     print(lst)
     for variable in variables_we_like:
         print(variable)
-        print(data[variable])
+        print(data[variable].shape)
+
         if variable == 'energy':
             plt.hist(data[variable])
+            plt.xlabel('Energy (MeV)')
+            plt.ylabel('counts')
             plt.show()
-        elif variable == 'position':
-            fig = plt.figure()
-            ax = fig.add_subplot(projection='3d')
-            ax.scatter(data[variable][:,0], data[variable][:,1], data[variable][:,2], marker='o')
-        elif variable == 'direction':
-            fig = plt.figure()
-            ax = fig.add_subplot(projection='3d')
-            ax.quiver(data['position'][:,0], data['position'][:,1], data['position'][:,2], data[variable][:,0], data[variable][:,1], data[variable][:,2], length=0.1, normalize=True)
+
+
+        if variable == 'direction': 
+            x_variable = data[variable][:,0]  #extract the first component of 'variable' to plot it
+            y_variable = data[variable][:,1]
+            z_variable = data[variable][:,2]
+            bins = 25
+
+            fig, ((ax0, ax1),(ax2, ax3)) = plt.subplots(nrows = 2, ncols = 2)
+
+
+            ax0.hist(x_variable, bins = bins, density  = True,  color = 'coral')
+            ax0.set_title('x_component')
+
+            ax1.hist(y_variable, bins = bins, density  = True,  color = 'darkviolet')
+            ax1.set_title('y_component')
+
+            ax2.hist(x_variable, bins = bins, density  = True,  color = 'skyblue')
+            ax2.set_title('z_component')
+
+            ax3.hist(data[variable], bins = bins, density = True)
+
+
+            fig.suptitle('Direction')
+
+            fig.tight_layout()
+            plt.show()
+
+
+
+        if variable == 'digi_hit_pmt':
+            #plt.hist(data[variable].flatten)  
+            plt.hist(data[variable])
+            plt.title('digi_hit_pmt')
+            plt.show()
+
+
+        if variable == 'digi_hit_charge':
+            plt.hist(data[variable])
+            plt.title('digi_hit_charge')
+            plt.show()
+
+    
+        if variable == 'digi_hit_time':
+            plt.hist(data[variable])
+            plt.title('digi_hit_time')
+            plt.show()
+
+            
+
+
+
+
